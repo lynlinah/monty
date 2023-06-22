@@ -5,9 +5,9 @@ void monty_pchar(stack_t **stack, unsigned int counter);
 void monty_pstr(stack_t **stack, unsigned int counter);
 
 /**
- * monty_nop - Does absolutely nothing.
- * @stack: A pointer to the top mode.
- * @counter: The current working line number.
+ * monty_nop - Does absolutely nothing for the Monty opcode 'nop'.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @counter: The current working line number of a Monty bytecodes file.
  */
 void monty_nop(stack_t **stack, unsigned int counter)
 {
@@ -18,8 +18,8 @@ void monty_nop(stack_t **stack, unsigned int counter)
 /**
  * monty_pchar - Prints the character in the top value
  *               node of a stack_t linked list.
- * @stack: A pointer to the top mode node.
- * @counter: The current working line number.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @counter: The current working line number of a Monty bytecodes file.
  */
 void monty_pchar(stack_t **stack, unsigned int counter)
 {
@@ -40,8 +40,8 @@ void monty_pchar(stack_t **stack, unsigned int counter)
 
 /**
  * monty_pstr - Prints the string contained in a stack_t linked list.
- * @stack: A pointer to the top mode node.
- * @counter: The current working line number.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @counter: The current working line number of a Monty bytecodes file.
  */
 void monty_pstr(stack_t **stack, unsigned int counter)
 {

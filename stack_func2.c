@@ -3,6 +3,7 @@
 void monty_rotl(stack_t **stack, unsigned int counter);
 void monty_rotr(stack_t **stack, unsigned int counter);
 void monty_stack(stack_t **stack, unsigned int counter);
+void monty_queue(stack_t **stack, unsigned int counter);
 
 /**
  * monty_rotl - Rotates the top value of a stack_t linked list to the bottom.
@@ -11,51 +12,49 @@ void monty_stack(stack_t **stack, unsigned int counter);
  */
 void monty_rotl(stack_t **stack, unsigned int counter)
 {
-	{
-	stack_t *runner = *stack;
+	stack_t *top, *bottom;
 
-	int aux1 = 0;
-
-	if (!counter || !stack || !*stack || !(*stack)->next)
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 		return;
 
-	aux1 = runner->n;
+	top = (*stack)->next;
+	bottom = (*stack)->next;
+	while (bottom->next != NULL)
+		bottom = bottom->next;
 
-	while (runner->next)
-	{
-		runner = runner->next;
-		runner->prev->n = runner->n;
-	}
+	top->next->prev = *stack;
+	(*stack)->next = top->next;
+	bottom->next = top;
+	top->next = NULL;
+	top->prev = bottom;
 
-	runner->n = aux1;
+	(void)counter;
 }
 
 /**
- * monty_rotr - mod top of stack y second top stacks
- * @stack: pointer to lists for monty stack
- * @counter: number of line opcode occurs on
+ * monty_rotr - Rotates the bottom value of a stack_t linked list to the top.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @counter: The current working line number of a Monty bytecodes file.
  */
 void monty_rotr(stack_t **stack, unsigned int counter)
 {
-	stack_t *runner = *stack;
+	stack_t *top, *bottom;
 
-	int aux1 = 0;
-
-	if (!counter || !stack || !*stack || !(*stack)->next)
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 		return;
 
-	while (runner->next)
-		runner = runner->next;
+	top = (*stack)->next;
+	bottom = (*stack)->next;
+	while (bottom->next != NULL)
+		bottom = bottom->next;
 
-	aux1 = runner->n;
+	bottom->prev->next = NULL;
+	(*stack)->next = bottom;
+	bottom->prev = *stack;
+	bottom->next = top;
+	top->prev = bottom;
 
-	while (runner->prev)
-	{
-		runner = runner->prev;
-		runner->next->n = runner->n;
-	}
-
-	runner->n = aux1;
+	(void)counter;
 }
 
 /**
@@ -66,5 +65,16 @@ void monty_rotr(stack_t **stack, unsigned int counter)
 void monty_stack(stack_t **stack, unsigned int counter)
 {
 	(*stack)->n = STACK;
+	(void)counter;
+}
+
+/**
+ * monty_queue - Converts a stack to a queue.
+ * @stack: A pointer to the top mode node of a stack_t linked list.
+ * @counter: The current working line number of a Monty bytecodes file.
+ */
+void monty_queue(stack_t **stack, unsigned int counter)
+{
+	(*stack)->n = QUEUE;
 	(void)counter;
 }
